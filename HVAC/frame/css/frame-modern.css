@@ -1,0 +1,203 @@
+/* ============================================================
+   Frame — modern design layer (2026)
+   A light, contemporary polish over the existing markup.
+   Loaded LAST so it wins. Keeps Frame's blue identity intact —
+   refined tokens, spacing, cards, hovers. No re-theme.
+   ============================================================ */
+
+:root {
+  --accent: #1a57a5;              /* Frame blue — keep identity */
+  --accent-hover: #12457f;
+  --accent-deep: #0f3a6b;
+  --accent-soft: #eef4fb;         /* softer tint for light sections */
+  --star: #f79f24;               /* rating gold — keep */
+  --text: #1c2026;
+  --body: #565c65;
+  --muted: #8b919b;
+  --line: #e7ebf1;
+  --line-strong: #d7dce4;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 1px 2px rgba(16,24,40,.04), 0 6px 20px rgba(16,24,40,.06);
+  --shadow-hover: 0 22px 48px -12px rgba(16,24,40,.20);
+  --shadow-accent: 0 14px 30px -10px rgba(26,87,165,.45);
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+/* ---------- base ---------- */
+body {
+  color: var(--body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a { color: var(--accent); transition: color .2s ease; text-decoration: none; }
+a:hover, a:focus { color: var(--accent-hover); }
+img { max-width: 100%; height: auto; }
+.text-primary { color: var(--accent) !important; }
+.probootstrap-link { color: var(--accent); font-weight: 600; }
+
+/* soften the very saturated light-section background */
+.probootstrap-section.probootstrap-bg-light { background: var(--accent-soft); }
+
+/* ---------- navbar: animated underline on hover ---------- */
+.probootstrap-navbar .navbar-nav > li > a {
+  position: relative;
+  letter-spacing: .04em;
+  font-weight: 600;
+}
+@media (min-width: 768px) {
+  .probootstrap-navbar .navbar-nav > li > a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 20px; height: 2px;
+    background: currentColor; border-radius: 2px;
+    transform: scaleX(0); transform-origin: center; opacity: .95;
+    transition: transform .22s var(--ease);
+  }
+  .probootstrap-navbar .navbar-nav > li:hover > a::after,
+  .probootstrap-navbar .navbar-nav > li.active > a::after { transform: scaleX(1); }
+}
+.probootstrap-navbar .navbar-brand { letter-spacing: .02em; }
+
+/* ---------- hero: gradient overlay for depth (replaces flat black scrim) ---------- */
+.probootstrap-hero:before {
+  background: linear-gradient(180deg, rgba(9,20,38,.42) 0%, rgba(9,20,38,.52) 55%, rgba(9,20,38,.68) 100%);
+}
+.probootstrap-hero .intro-text .probootstrap-heading {
+  letter-spacing: -.01em;
+  text-shadow: 0 2px 30px rgba(0,0,0,.25);
+}
+
+/* ---------- buttons: subtle rounding + lift ---------- */
+.btn {
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  letter-spacing: .01em;
+  transition: transform .2s var(--ease), background .2s ease, box-shadow .25s var(--ease), border-color .2s ease;
+}
+.btn.btn-primary {
+  background: var(--accent); border-color: var(--accent);
+  box-shadow: var(--shadow-accent);
+}
+.btn.btn-primary:hover, .btn.btn-primary:active, .btn.btn-primary:focus {
+  background: var(--accent-hover); border-color: var(--accent-hover);
+  transform: translateY(-2px);
+}
+.btn.btn-black:hover, .btn.btn-black:active, .btn.btn-black:focus { transform: translateY(-2px); }
+/* hero buttons keep their 2px frame but pick up the softer radius + lift */
+.probootstrap-hero .intro-text .probootstrap-subheading .btn { border-radius: var(--radius-sm); }
+.probootstrap-hero .intro-text .probootstrap-subheading .btn:hover { transform: translateY(-2px); }
+
+/* ---------- section headings: refine the accent underline ---------- */
+.probootstrap-section-heading .probootstrap-heading { letter-spacing: -.015em; }
+.probootstrap-section-heading .probootstrap-heading:after {
+  height: 3px; width: 60px; border-radius: 3px; background: var(--accent);
+}
+.probootstrap-section-heading .probootstrap-heading-2 { letter-spacing: -.01em; }
+
+/* ---------- service items: hover-lift cards ---------- */
+.probootstrap-service-item {
+  border-radius: var(--radius);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease), background .3s ease;
+}
+.probootstrap-service-item .icon { transition: transform .3s var(--ease); }
+@media (min-width: 769px) {
+  .probootstrap-service-item:hover {
+    background: #fff; box-shadow: var(--shadow-hover); transform: translateY(-6px);
+  }
+  .probootstrap-service-item:hover .icon { transform: translateY(-4px); }
+}
+
+/* ---------- showcase / laptop images: rounded + soft shadow + lift ---------- */
+.probootstrap-shadow {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.probootstrap-shadow:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+.probootstrap-section img.img-fluid:not(.rounded-circle):not(.probootstrap-author-photo) { border-radius: var(--radius); }
+
+/* ---------- pricing cards ---------- */
+.probootstrap-pricing {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s ease;
+  background: #fff;
+}
+.probootstrap-pricing:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: transparent;
+}
+.probootstrap-pricing.probootstrap-popular {
+  border: 2px solid var(--accent);
+  box-shadow: var(--shadow-hover);
+}
+@media (min-width: 769px) {
+  .probootstrap-pricing.probootstrap-popular { transform: translateY(-8px); }
+  .probootstrap-pricing.probootstrap-popular:hover { transform: translateY(-12px); }
+}
+.probootstrap-pricing .probootstrap-price strong { letter-spacing: -.02em; }
+
+/* ---------- testimonials: real cards, subtle default + hover lift ---------- */
+.probootstrap-testimonial {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s ease;
+}
+.probootstrap-testimonial:hover, .probootstrap-testimonial:focus {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: transparent;
+}
+.probootstrap-testimonial .probootstrap-author-photo {
+  border: 3px solid #fff;
+  box-shadow: 0 4px 14px rgba(16,24,40,.14);
+}
+.probootstrap-testimonial .probootstrap-rate i.icon-star { color: var(--star); }
+.probootstrap-testimonial blockquote p { color: #2a2f37; }
+
+/* ---------- CTA band: subtle gradient depth (keeps the blue identity) ---------- */
+.probootstrap-section.probootstrap-cta {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+}
+
+/* ---------- contact form: rounded inputs + accent focus ring ---------- */
+.probootstrap-form {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.probootstrap-form .form-control {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line-strong);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.probootstrap-form .form-control:active, .probootstrap-form .form-control:focus {
+  border: 1px solid var(--accent);
+  box-shadow: 0 0 0 3px rgba(26,87,165,.15);
+}
+.probootstrap-contact-details li > span {
+  color: var(--muted); letter-spacing: .08em; font-size: 12px; font-weight: 700; margin-bottom: 4px;
+}
+
+/* ---------- footer: keep blue identity, add depth + brighter links ---------- */
+.probootstrap-footer {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
+}
+.probootstrap-footer a { color: rgba(255,255,255,.55); }
+.probootstrap-footer a:hover { color: #fff; }
+.probootstrap-footer .probootstrap-social > a {
+  display: inline-block;
+  transition: transform .2s var(--ease), color .2s ease;
+}
+.probootstrap-footer .probootstrap-social > a:hover { transform: translateY(-3px); }
+
+/* ---------- Bootstrap 5 .media flex shim (defensive — harmless if unused) ---------- */
+.media { display: flex; align-items: flex-start; }
+.media > .media-left, .media > .pull-left { flex-shrink: 0; margin-right: 16px; }
+.media > .media-body { flex: 1; min-width: 0; }
+
+/* ---------- respect reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .btn, .probootstrap-service-item, .probootstrap-shadow, .probootstrap-pricing,
+  .probootstrap-testimonial, .probootstrap-footer .probootstrap-social > a { transition: none !important; }
+}
